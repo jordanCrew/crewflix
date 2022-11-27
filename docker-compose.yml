@@ -1,6 +1,6 @@
 services:
   apache:
-    build: ./apache/
+    build: ./docker/apache/
     volumes:
       - ./app/:/usr/local/apache2/htdocs/
     ports:
@@ -11,7 +11,7 @@ services:
       - public
 
   php:
-    build: ./php/
+    build: ./docker/php/
     volumes: 
       - ./app/:/var/www/html/
     ports:
