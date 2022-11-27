@@ -1,28 +1,26 @@
-networks:
-  dev:
-
 services:
   apache:
-    image: httpd:2
+    build: ./apache/
     volumes:
-      - ./:/usr/local/apache2/htdocs/
+      - ./app/:/usr/local/apache2/htdocs/
     ports:
       - 80:80
     depends_on:
       - php
     networks:
-      - dev
+      - public
 
   php:
-    image: php:8-fpm
+    build: ./php/
     volumes: 
-      - ./:/var/www/html/
+      - ./app/:/var/www/html/
     ports:
       - 9000:9000
     depends_on: 
       - mysql
     networks:
-      - dev
+      - public
+      - private
 
   mysql:
     image: mysql:8.0
@@ -33,7 +31,11 @@ services:
     ports:
       - 3306:3306
     networks:
-      - dev
+      - private
+
+networks:
+  public:
+  private:
 
 volumes:
   db:
