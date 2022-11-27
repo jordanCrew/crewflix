@@ -1,0 +1,39 @@
+networks:
+  dev:
+
+services:
+  apache:
+    image: httpd:2
+    volumes:
+      - ./:/usr/local/apache2/htdocs/
+    ports:
+      - 80:80
+    depends_on:
+      - php
+    networks:
+      - dev
+
+  php:
+    image: php:8-fpm
+    volumes: 
+      - ./:/var/www/html/
+    ports:
+      - 9000:9000
+    depends_on: 
+      - mysql
+    networks:
+      - dev
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - 3306:3306
+    networks:
+      - dev
+
+volumes:
+  db:
