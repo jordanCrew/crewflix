@@ -30,7 +30,7 @@ class PreviewProvider {
 
                             <div class='buttons'>
                                 <button><i class='fas fa-play'></i> Play</button>
-                                <button onclick='volumeToggle(this)'><i class='fas fa-volume-mute'></i></button
+                                <button onclick='volumeToggle(this)'><i class='fas fa-volume-mute'></i></button>
                             </div>
                         </div>
 
@@ -38,15 +38,24 @@ class PreviewProvider {
         
                 </div>";
     }
+    
+    public function createEntityPreviewSquare($entity) {
+        $id = $entity->getId();
+        $thumbnail = $entity->getThumbnail();
+        $name = $entity->getName();
+
+        return "<a href='enitity.php?id=$id'>
+                    <div class='previewContainer small'>
+                        <img src='$thumbnail' title='$name'>
+                    </div>
+                </a>";
+    }
 
     private function getRandomEntity(){
         
-        $query = $this->con->prepare("SELECT * FROM entities ORDER BY RAND() LIMIT 1");
-        $query->execute();
+        $entity = EntityProvider::getEntities($this->con, null, 1);
 
-        $row = $query->fetch(PDO::FETCH_ASSOC);
-        
-        return new Entity($this->con, $row);
+        return $entity[0];
     }
 }
 ?>
