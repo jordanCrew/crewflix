@@ -55,7 +55,7 @@ class EntityProvider {
         return $result;
     }
 
-        public static function getMovieEntities($con, $categoryId, $limit) {
+    public static function getMovieEntities($con, $categoryId, $limit) {
         $sql = "SELECT DISTINCT(entities.id) FROM entities
                 INNER JOIN videos ON entities.id = videos.entityId
                 WHERE videos.isMovie = 1 ";
@@ -79,6 +79,25 @@ class EntityProvider {
         $result = array();
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
             $result[] = new Entity($con, $row["id"]);
+        }
+
+        return $result;
+    }
+
+    public static function getSearchEntities($con, $term) {
+            $sql = "SELECT * FROM entities 
+                WHERE name LIKE CONCAT('%', :term, '%')
+                LIMIT 30";
+
+        $query = $con->prepare($sql);
+
+        $query->bindValue(":term", $term);
+
+        $query->execute();
+
+        $result = array();
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $result[] = new Entity($con, $row);
         }
 
         return $result;
