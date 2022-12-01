@@ -35,7 +35,7 @@ After standing up the containers you will need to create the database, tables an
 
 4. create the users table
 
-   ````CREATE TABLE users (
+   ```CREATE TABLE users (
        id int NOT NULL AUTO_INCREMENT,
        firstName VARCHAR(25),
        lastName VARCHAR(25),
