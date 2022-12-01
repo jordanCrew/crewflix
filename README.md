@@ -26,8 +26,8 @@ After standing up the containers you will need to create the database, tables an
 
 2. once in the container access MySQL
 
-   `mysql -root -p`
-   `password`
+- `mysql -root -p`
+- `password`
 
 3. create the database
 
@@ -35,7 +35,8 @@ After standing up the containers you will need to create the database, tables an
 
 4. create the users table
 
-   ```CREATE TABLE users (
+   ```
+   CREATE TABLE users (
        id int NOT NULL AUTO_INCREMENT,
        firstName VARCHAR(25),
        lastName VARCHAR(25),
@@ -45,9 +46,8 @@ After standing up the containers you will need to create the database, tables an
        signUpDate DATETIME DEFAULT CURRENT_TIMESTAMP,
        isSubscribed TINYINT(1) DEFAULT 0,
        PRIMARY KEY (id)
-   );```
-
-   ````
+   );
+   ```
 
 5. download _crewflix/imports/categories.sql_ copy the contents of the file into the MySQL shell and press enter to create the categories tables
 
@@ -57,8 +57,8 @@ After standing up the containers you will need to create the database, tables an
 
 8. exit MySQL and the shell
 
-`exit;`
-`exit`
+- `exit;`
+- `exit`
 
 ---
 
@@ -66,4 +66,4 @@ After standing up the containers you will need to create the database, tables an
 
 To shut down the application you can run:
 
-`docker compose down`
+   `docker compose down`
